@@ -29,29 +29,12 @@ import androidx.navigation3.ui.NavDisplay
 import dev.himanshu.recipes.ui.theme.RecipesTheme
 import dev.himanshu.recipes.utils.AppNavigator
 
-//data class Dummy(
-//    val id:Int,
-//    val name: String
-//)
-//
-//sealed interface Dest{
-//    data object FirstScreen
-//
-//    data class SecondScreen(
-//        val id:Int,
-//        val dummy: Dummy
-//    )
-//
-//}
-
-
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             RecipesTheme {
                 Scaffold(
                     contentWindowInsets = WindowInsets.systemBars
@@ -60,67 +43,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
-
-
-//                val backStack = remember{ mutableStateListOf<Any>(Dest.FirstScreen) }
-//
-//                NavDisplay(backStack = backStack,
-//                    onBack = {backStack.removeLastOrNull()},
-//                    entryProvider = entryProvider {
-//                        entry<Dest.FirstScreen> {key->
-//                            FirstScreen(modifier = Modifier.fillMaxSize()) {
-//                                backStack.add(Dest.SecondScreen(
-//                                    12, Dummy(34,"Himanshu")
-//                                ))
-//                            }
-//                        }
-//                        entry<Dest.SecondScreen> { key->
-//                            SecondScreen(modifier = Modifier.fillMaxSize(), id = key.id,
-//                                dummy = key.dummy) {
-//                                backStack.removeLastOrNull()
-//                            }
-//                        }
-//                    })
-
-
             }
         }
     }
 }
-
-//@Composable
-//fun FirstScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
-//    Column(
-//        modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//
-//        Text("First Screen")
-//        Spacer(Modifier.height(12.dp))
-//        Button(onClick) {
-//            Text("Go to second screen")
-//        }
-//
-//    }
-//}
-//
-//
-//
-//@Composable
-//fun SecondScreen(modifier: Modifier = Modifier,
-//                 id:Int,
-//                 dummy: Dummy,
-//                 onClick: () -> Unit) {
-//    Column(
-//        modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//
-//        Text("Second Screen ${id} ${dummy.name} ${dummy.id}")
-//        Spacer(Modifier.height(12.dp))
-//        Button(onClick) {
-//            Text("Go to first screen")
-//        }
-//
-//    }
-//}

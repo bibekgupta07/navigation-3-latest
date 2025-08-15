@@ -67,12 +67,11 @@ sealed interface Dest {
 }
 
 class Navigator {
-    private val _backStack = mutableStateListOf<Any>(Dest.Screen1)
-    val backStack: List<Any> = _backStack
+    private val _backStack = mutableStateListOf<Dest>(Dest.Screen1)
+    val backStack: List<Dest> get() = _backStack
 
     fun navigateTo(destination: Dest) {
         _backStack.add(destination)
-
     }
 
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
@@ -97,44 +96,44 @@ fun AppNavigator(modifier: Modifier = Modifier) {
         backStack = navigator.backStack,
         onBack = { coordinator.goBack() },
         entryProvider = entryProvider {
-            entry<Dest.Screen1> { key ->
+
+            entry<Dest.Screen1> {
                 Screen1(
                     modifier = Modifier.fillMaxSize(),
-//                    onNavigateTo = navigator::navigateTo,
                     navigateToScreen2 = coordinator::navigateToScreen2,
                     navigateToScreen5 = coordinator::navigateToScreen5
                 )
             }
-            entry<Dest.Screen2> { key ->
+
+            entry<Dest.Screen2> { dest ->
                 Screen2(
                     modifier = Modifier.fillMaxSize(),
-                    message = key.message,
-//                    onNavigateTo = navigator::navigateTo,
+                    message = dest.message,
                     navigateToScreen3 = coordinator::navigateToScreen3,
-                   navigateToScreen5 = coordinator::navigateToScreen5
-                )
-            }
-            entry<Dest.Screen3> { key ->
-                Screen3(
-                    modifier = Modifier.fillMaxSize(),
-                    userId = key.userId,
-                    userName = key.userName,
-//                    onNavigateTo = navigator::navigateTo,
-                    navigateToScreen4 = coordinator::navigateToScreen4
-                )
-            }
-            entry<Dest.Screen4> { key ->
-                Screen4(
-                    modifier = Modifier.fillMaxSize(),
-                    itemId = key.itemId,
-//                    onNavigateTo = navigator::navigateTo,
                     navigateToScreen5 = coordinator::navigateToScreen5
                 )
             }
-            entry<Dest.Screen5> { key ->
+
+            entry<Dest.Screen3> { dest ->
+                Screen3(
+                    modifier = Modifier.fillMaxSize(),
+                    userId = dest.userId,
+                    userName = dest.userName,
+                    navigateToScreen4 = coordinator::navigateToScreen4
+                )
+            }
+
+            entry<Dest.Screen4> { dest ->
+                Screen4(
+                    modifier = Modifier.fillMaxSize(),
+                    itemId = dest.itemId,
+                    navigateToScreen5 = coordinator::navigateToScreen5
+                )
+            }
+
+            entry<Dest.Screen5> {
                 Screen5(
                     modifier = Modifier.fillMaxSize(),
-//                    onNavigateTo = navigator::navigateTo,
                     navigateToScreen1 = coordinator::navigateToScreen1
                 )
             }
